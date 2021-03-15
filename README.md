@@ -2,6 +2,11 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## ディレクトリ構成
+* src(あとでpopupに改名予定): ポップアップの見た目に関するコード
+* browser-action: DoItおじさんのようなブラウザアクションの機能に関するコード
+* utils: ポップアップとブラウザアクションで共通で使用する処理(Storage読み書きなど)
+
 ## Available Scripts
 
 In the project directory, you can run:
