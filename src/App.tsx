@@ -1,25 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Container, makeStyles, Typography } from "@material-ui/core";
+import Header from "./components/header";
+import { BookForm } from "./components/book-form";
+
+const useStyles = makeStyles({
+  root: {
+    minWidth: 300,
+    // maxWidth: 1000,
+    minHeight: 300,
+    // maxHeight: 1000,
+  },
+  header: {
+    height: 50,
+  },
+  content: {
+    marginTop: 80,
+    padding: 12,
+  },
+});
 
 function App() {
+  const classes = useStyles();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container className={classes.root}>
+      <Header height={50} />
+      <Container className={classes.content}>
+        <BookForm onSubmit={console.log} />
+      </Container>
+    </Container>
   );
 }
 
