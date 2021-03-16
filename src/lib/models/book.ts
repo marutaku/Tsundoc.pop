@@ -1,4 +1,4 @@
-import { BookImpl } from "../types";
+import { BookImpl } from "../../types";
 import moment from "moment";
 
 export class Book implements BookImpl {

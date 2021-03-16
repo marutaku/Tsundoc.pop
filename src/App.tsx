@@ -4,8 +4,8 @@ import { Header } from "./components/header";
 import { BookForm } from "./components/book-form";
 import { Switch, Route, BrowserRouter, Redirect } from "react-router-dom";
 import { BookList } from "./components/book-list";
-import { Book } from "../lib/models/book";
-import { LocalStorage } from "../lib/storage/local-storage";
+import { Book } from "./lib/models/book";
+import { LocalStorage } from "./lib/storage/local-storage";
 
 const useStyles = makeStyles({
   root: {

@@ -1,6 +1,6 @@
 import { List, ListItem, Typography } from "@material-ui/core";
 import React from "react";
-import { Book } from "../../../lib/book";
+import { Book } from "../../lib/models/book";
 
 export const BookList = ({ books }: { books: Book[] }) => {
   return (

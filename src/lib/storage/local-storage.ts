@@ -24,13 +24,13 @@ export class LocalStorage {
 
   async set(key: string, value: string): Promise<void> {
     return new Promise((resolve) =>
-      this.storage.set({ [key]: value }, () => resolve(null))
+      this.storage.set({ [key]: value }, () => resolve())
     );
   }
 
   async remove(key: string): Promise<void> {
     return new Promise((resolve) => {
-      this.storage.remove(key, () => resolve(null));
+      this.storage.remove(key, () => resolve());
     });
   }
 }
