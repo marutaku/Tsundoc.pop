@@ -17,7 +17,10 @@ export class LocalStorage {
   async getAll(): Promise<LocalStorageRecord[]> {
     return new Promise((resolve) =>
       this.storage.get((items) => {
-        return resolve(items.items());
+        const recordArray = Object.keys(items).map((k) => {
+          return { [k]: items[k] };
+        });
+        return resolve(recordArray);
       })
     );
   }
