@@ -34,7 +34,7 @@ function App() {
       setBooks(books);
     };
     fetchData();
-  });
+  }, [storage]);
 
   const submitBook = async (newBook: Book) => {
     await storage.set(newBook.isbn, newBook.toString());
