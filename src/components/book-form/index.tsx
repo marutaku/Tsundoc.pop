@@ -9,7 +9,14 @@ interface BookFormProps {
 export const BookForm = ({ onSubmit }: BookFormProps) => {
   const [title, setTitle] = useState<string>("");
   const [isbn, setIsbn] = useState<string>("");
-  const handleSubmit = () => onSubmit(new Book(title, isbn));
+  const [authorsString, setAuthors] = useState<string>("");
+  const handleSubmit = () => {
+    const authors = authorsString.split(",");
+    onSubmit(new Book(title, isbn, authors));
+    setTitle("");
+    setIsbn("");
+    setAuthors("");
+  };
   return (
     <Container>
       <Grid
@@ -32,6 +39,15 @@ export const BookForm = ({ onSubmit }: BookFormProps) => {
             value={isbn}
             onChange={(e) => setIsbn(e.target.value)}
             label="ISBNコード"
+            style={{ width: "100%" }}
+          />
+        </Grid>
+        <Grid item xs={10}>
+          <TextField
+            value={authorsString}
+            onChange={(e) => setAuthors(e.target.value)}
+            label="著者"
+            placeholder="複数人の場合はカンマ区切り"
             style={{ width: "100%" }}
           />
         </Grid>

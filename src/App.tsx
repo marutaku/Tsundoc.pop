@@ -40,6 +40,11 @@ function App() {
     await storage.set(newBook.isbn, newBook.toString());
     setBooks([...books, newBook]);
   };
+  const deleteBook = async (targetBook: Book) => {
+    await storage.remove(targetBook.isbn);
+    setBooks(books.filter((book) => book.isbn !== targetBook.isbn));
+  };
+
   return (
     <BrowserRouter>
       <Container className={classes.root}>
@@ -50,7 +55,7 @@ function App() {
               <BookForm onSubmit={submitBook} />
             </Route>
             <Route exact path="/list">
-              <BookList books={books} />
+              <BookList books={books} onDelete={deleteBook} />
             </Route>
             <Route render={() => <Redirect to="/" />} />
           </Switch>
