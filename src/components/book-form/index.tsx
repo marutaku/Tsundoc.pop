@@ -1,13 +1,15 @@
 import { Button, Container, Grid, TextField } from "@material-ui/core";
 import React, { useState } from "react";
+import { Book } from "../../../lib/models/book";
 
 interface BookFormProps {
-  onSubmit: (s1: string, s2: string) => void;
+  onSubmit: (book: Book) => void;
 }
 
 export const BookForm = ({ onSubmit }: BookFormProps) => {
-  const [bookName, setBookName] = useState<string>("");
+  const [title, setTitle] = useState<string>("");
   const [isbn, setIsbn] = useState<string>("");
+  const handleSubmit = () => onSubmit(new Book(title, isbn));
   return (
     <Container>
       <Grid
@@ -19,8 +21,8 @@ export const BookForm = ({ onSubmit }: BookFormProps) => {
       >
         <Grid item xs={10}>
           <TextField
-            value={bookName}
-            onChange={(e) => setBookName(e.target.value)}
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
             label="書籍名"
             style={{ width: "100%" }}
           />
@@ -34,7 +36,9 @@ export const BookForm = ({ onSubmit }: BookFormProps) => {
           />
         </Grid>
         <Grid item xs={10}>
-          <Button color="primary" onClick={() => onSubmit(bookName, isbn)}>保存</Button>
+          <Button color="primary" onClick={handleSubmit}>
+            保存
+          </Button>
         </Grid>
       </Grid>
     </Container>

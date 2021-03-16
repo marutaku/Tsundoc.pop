@@ -6,9 +6,11 @@ import {
   Typography,
   Grid,
 } from "@material-ui/core";
-import { Add } from "@material-ui/icons";
+import { Add, List } from "@material-ui/icons";
+import { useHistory } from "react-router-dom";
 
 export const Header = ({ height = 64 }) => {
+  const history = useHistory();
   return (
     <AppBar style={{ height }}>
       <Toolbar style={{ minHeight: height }}>
@@ -20,8 +22,13 @@ export const Header = ({ height = 64 }) => {
           </Grid>
           <Grid container item xs={6} justify="flex-end">
             <Grid item>
-              <IconButton color="inherit">
+              <IconButton color="inherit" onClick={() => history.push("/")}>
                 <Add />
+              </IconButton>
+            </Grid>
+            <Grid item>
+              <IconButton color="inherit" onClick={() => history.push("/list")}>
+                <List />
               </IconButton>
             </Grid>
           </Grid>

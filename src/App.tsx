@@ -1,33 +1,62 @@
-import React from "react";
-import { Container, makeStyles, Typography } from "@material-ui/core";
-import Header from "./components/header";
+import React, { useEffect, useState } from "react";
+import { Container, makeStyles } from "@material-ui/core";
+import { Header } from "./components/header";
 import { BookForm } from "./components/book-form";
+import { Switch, Route, BrowserRouter, Redirect } from "react-router-dom";
+import { BookList } from "./components/book-list";
+import { Book } from "../lib/models/book";
+import { LocalStorage } from "../lib/storage/local-storage";
 
 const useStyles = makeStyles({
   root: {
     minWidth: 300,
-    // maxWidth: 1000,
-    minHeight: 300,
-    // maxHeight: 1000,
   },
   header: {
     height: 50,
   },
   content: {
-    marginTop: 80,
+    marginTop: 60,
     padding: 12,
   },
 });
 
 function App() {
   const classes = useStyles();
+  const storage = new LocalStorage();
+  const [books, setBooks] = useState<Book[]>([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const localStorageRecords = await storage.getAll();
+      const books = localStorageRecords.map((record) => {
+        const key = Object.keys(record)[0];
+        return Book.parse(record[key]);
+      });
+      setBooks(books);
+    };
+    fetchData();
+  });
+
+  const submitBook = async (newBook: Book) => {
+    await storage.set(newBook.isbn, newBook.toString());
+    setBooks([...books, newBook]);
+  };
   return (
-    <Container className={classes.root}>
-      <Header height={50} />
-      <Container className={classes.content}>
-        <BookForm onSubmit={console.log} />
+    <BrowserRouter>
+      <Container className={classes.root}>
+        <Header height={50} />
+        <Container className={classes.content}>
+          <Switch>
+            <Route exact path="/">
+              <BookForm onSubmit={submitBook} />
+            </Route>
+            <Route exact path="/list">
+              <BookList books={books} />
+            </Route>
+            <Route render={() => <Redirect to="/" />} />
+          </Switch>
+        </Container>
       </Container>
-    </Container>
+    </BrowserRouter>
   );
 }
 
