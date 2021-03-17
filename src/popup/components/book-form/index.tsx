@@ -30,7 +30,6 @@ export const BookForm = ({ onSubmit }: BookFormProps) => {
           return response.json();
           })
     .then(data => {
-      console.log(data);
       setTitle(data[0].summary.title);
       setAuthors(data[0].summary.author);
       setImage(data[0].summary.cover);
