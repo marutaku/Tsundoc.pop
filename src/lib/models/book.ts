@@ -15,7 +15,7 @@ export class Book implements BookImpl {
       isbn: this.isbn,
       authors: this.authors,
       image: this.image,
-      createdAt: moment(this.createdAt).format("YYYY/MM/DD kk:mm"),
+      createdAt: moment(this.createdAt).toISOString(),
     });
   }
   static parse(jsonString: string): Book {
