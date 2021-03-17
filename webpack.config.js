@@ -56,5 +56,6 @@ module.exports = {
       ],
     }),
     new WriteFilePlugin(),
+    new HtmlWebpackPlugin()
   ],
 };
