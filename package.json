@@ -37,7 +37,7 @@
   },
   "scripts": {
     "start": "INLINE_RUNTIME_CHUNK=false webpack -w",
-    "build": "INLINE_RUNTIME_CHUNK=false webpack",
+    "build": "INLINE_RUNTIME_CHUNK=false webpack --mode=production",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
