@@ -1,5 +1,5 @@
 import { Button, Container, Grid, TextField } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Book } from "../../../lib/models/book";
 
 interface BookFormProps {
@@ -10,13 +10,35 @@ export const BookForm = ({ onSubmit }: BookFormProps) => {
   const [title, setTitle] = useState<string>("");
   const [isbn, setIsbn] = useState<string>("");
   const [authorsString, setAuthors] = useState<string>("");
+  const [image, setImage] = useState<string>("");
   const handleSubmit = () => {
     const authors = authorsString.split(",");
-    onSubmit(new Book(title, isbn, authors));
+    onSubmit(new Book(title, isbn, authors, image));
     setTitle("");
     setIsbn("");
     setAuthors("");
+    setImage("");
   };
+  // useEffectでうまくやりたかったけど時間なかった
+  const fetchBookInfo = () => {
+    const baseUrl: string = 'https://api.openbd.jp/v1/get?isbn=';
+    fetch(baseUrl + isbn)
+      .then(response => {
+          if (!response.ok) {
+          throw new Error('Network response was not ok');
+          }
+          return response.json();
+          })
+    .then(data => {
+      console.log(data);
+      setTitle(data[0].summary.title);
+      setAuthors(data[0].summary.author);
+      setImage(data[0].summary.cover);
+        })
+    .catch(error => {
+        console.error('There has been a problem with your fetch operation:', error);
+        });
+  }
   return (
     <Container>
       <Grid
@@ -28,17 +50,22 @@ export const BookForm = ({ onSubmit }: BookFormProps) => {
       >
         <Grid item xs={10}>
           <TextField
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            label="書籍名"
+            value={isbn}
+            onChange={(e) => setIsbn(e.target.value)}
+            label="ISBNコード"
             style={{ width: "100%" }}
           />
         </Grid>
         <Grid item xs={10}>
+          <Button color="primary" onClick={fetchBookInfo}>
+            検索
+          </Button>
+        </Grid>
+        <Grid item xs={10}>
           <TextField
-            value={isbn}
-            onChange={(e) => setIsbn(e.target.value)}
-            label="ISBNコード"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            label="書籍名"
             style={{ width: "100%" }}
           />
         </Grid>
@@ -50,6 +77,9 @@ export const BookForm = ({ onSubmit }: BookFormProps) => {
             placeholder="複数人の場合はカンマ区切り"
             style={{ width: "100%" }}
           />
+        </Grid>
+        <Grid item xs={10}>
+          <img src={image} style={{ width: "80%" }} />
         </Grid>
         <Grid item xs={10}>
           <Button color="primary" onClick={handleSubmit}>
