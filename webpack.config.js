@@ -9,7 +9,10 @@ module.exports = {
   mode: "development",
 
   // メインとなるJavaScriptファイル（エントリーポイント）
-  entry: "./src/index.tsx",
+  entry: {
+    "popup-index": "./src/popup-index.tsx",
+    "page-action": "./src/page-action.ts",
+  },
   devtool: "source-map",
   // ファイルの出力設定
   output: {
@@ -17,12 +20,6 @@ module.exports = {
     path: `${__dirname}/dist`,
     // 出力ファイル名
     filename: "./static/[name].js",
-  },
-  optimization: {
-    splitChunks: {
-      name: "vendor",
-      chunks: "initial",
-    },
   },
   module: {
     rules: [
@@ -59,8 +56,5 @@ module.exports = {
       ],
     }),
     new WriteFilePlugin(),
-    new HtmlWebpackPlugin({
-      template: "./public/index.html",
-    }),
   ],
 };
