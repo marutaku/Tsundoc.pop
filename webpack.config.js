@@ -10,6 +10,7 @@ module.exports = {
 
   // メインとなるJavaScriptファイル（エントリーポイント）
   entry: "./src/index.tsx",
+  devtool: "source-map",
   // ファイルの出力設定
   output: {
     //  出力ファイルのディレクトリ名
