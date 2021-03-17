@@ -47,15 +47,9 @@ module.exports = {
         {
           from: "./public/",
           to: path.resolve(__dirname, "dist"),
-          globOptions: {
-            ignore: [
-              "**/*.html", // sample.htmlは除外
-            ],
-          },
         },
       ],
     }),
     new WriteFilePlugin(),
-    new HtmlWebpackPlugin()
   ],
 };
