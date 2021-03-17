@@ -17,6 +17,12 @@ module.exports = {
     // 出力ファイル名
     filename: "./static/[name].js",
   },
+  optimization: {
+    splitChunks: {
+      name: "vendor",
+      chunks: "initial",
+    },
+  },
   module: {
     rules: [
       {
