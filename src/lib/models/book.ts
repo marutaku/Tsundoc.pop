@@ -1,5 +1,14 @@
-import { BookImpl } from "../../types";
 import moment from "moment";
+
+export interface BookImpl {
+  isbn: string;
+  title: string;
+  author?: string[];
+  image?: string;
+  createdAt: Date;
+  toString: () => string;
+  // static parse: (jsonString: string) => BookImpl;
+}
 
 export class Book implements BookImpl {
   constructor(
@@ -15,7 +24,7 @@ export class Book implements BookImpl {
       isbn: this.isbn,
       authors: this.authors,
       image: this.image,
-      createdAt: moment(this.createdAt).format("YYYY/MM/DD hh:mm"),
+      createdAt: moment(this.createdAt).toISOString(),
     });
   }
   static parse(jsonString: string): Book {

@@ -1,6 +1,6 @@
 import { Button, Container, Grid, TextField } from "@material-ui/core";
 import React, { useState } from "react";
-import { Book } from "../../lib/models/book";
+import { Book } from "../../../lib/models/book";
 
 interface BookFormProps {
   onSubmit: (book: Book) => void;

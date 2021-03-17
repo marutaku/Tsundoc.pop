@@ -11,7 +11,7 @@ import {
 import BookIcon from "@material-ui/icons/Book";
 import DeleteIcon from "@material-ui/icons/Delete";
 import React from "react";
-import { Book } from "../../lib/models/book";
+import { Book } from "../../../lib/models/book";
 
 export const BookList = ({
   books,
