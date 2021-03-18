@@ -1,0 +1,27 @@
+#banner-wrapper {
+  margin: 12px auto;
+  position: fixed;
+  bottom: 0;
+  z-index: 10000000;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+#embed-banner {
+  padding: 10px;
+  background-color: white;
+  border: solid 1px rgb(45, 45, 45);
+  border-radius: 10px;
+}
+
+#banner-title {
+  color: rgba(45, 45, 45);
+  font-size: 24px;
+  font-weight: 500;
+}
+
+#banner-subtitle {
+  color: rgba(80, 80, 80, 0.5);
+  font-size: 18px;
+}
