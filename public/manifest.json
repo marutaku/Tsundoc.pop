@@ -12,6 +12,12 @@
             "matches": [
                 "<all_urls>"
             ],
+            "html": [
+                "embed-banner.html"
+            ],
+            "css": [
+                "embed-banner.css"
+            ],
             "js": [
                 "static/page-action.js"
             ]
@@ -25,5 +31,9 @@
     "permissions": [
         "storage"
     ],
-    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+    "web_accessible_resources": [
+        "embed-banner.html",
+        "embed-banner.css"
+    ]
 }
