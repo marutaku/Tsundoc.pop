@@ -47,13 +47,17 @@ window.onload = async () => {
   if (!body) {
     throw new Error("Body not found ");
   }
-  const random = Math.floor(Math.random() * books.length);
-  if (books.length !== 0) {
+  const intervalHandler = () => {
+    const random = Math.floor(Math.random() * books.length);
     const injectedBanner = injectContent(
       banner,
       books[random].title,
       books[random].authors.join(",")
     );
     body.insertBefore(injectedBanner, body.firstChild);
+  };
+  if (books.length !== 0) {
+    intervalHandler();
+    setInterval(intervalHandler, 10000);
   }
 };
