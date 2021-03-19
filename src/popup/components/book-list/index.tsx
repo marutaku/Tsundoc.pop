@@ -29,7 +29,7 @@ export const BookList = ({
         <ListItem key={index}>
           <ListItemAvatar>
             <Avatar>
-              <BookIcon />
+            <img src={book.image}/>
             </Avatar>
           </ListItemAvatar>
           <ListItemText
