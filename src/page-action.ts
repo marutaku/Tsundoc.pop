@@ -11,12 +11,13 @@ async function createBanner(): Promise<Element> {
       banner.innerHTML = htmlString;
       return banner;
     });
+}
 
-  // console.log(htmlString);
-  // const content = document.createElement(htmlString);
-  // banner.src(content);
-  // return banner;
-  // return document.createElement("div");
+function createStyleSheetLink(): HTMLLinkElement {
+  const linkElement = document.createElement("link");
+  linkElement.setAttribute("rel", "stylesheet");
+  linkElement.setAttribute("href", chrome.extension.getURL("embed-banner.css"));
+  return linkElement;
 }
 
 function injectContent(
@@ -44,20 +45,24 @@ window.onload = async () => {
   });
   const banner = await createBanner();
   const body = document.querySelector("body");
+  const linkElement = createStyleSheetLink();
   if (!body) {
     throw new Error("Body not found ");
   }
+  body.insertBefore(banner, body.firstChild);
+  body.insertBefore(linkElement, body.firstChild);
+  const firstRandom = Math.floor(Math.random() * books.length);
+  injectContent(
+    banner,
+    books[firstRandom].title,
+    books[firstRandom].authors.join(",")
+  );
   const intervalHandler = () => {
     const random = Math.floor(Math.random() * books.length);
-    const injectedBanner = injectContent(
-      banner,
-      books[random].title,
-      books[random].authors.join(",")
-    );
-    body.insertBefore(injectedBanner, body.firstChild);
+    injectContent(banner, books[random].title, books[random].authors.join(","));
+    console.log("Show banner");
   };
   if (books.length !== 0) {
-    intervalHandler();
     setInterval(intervalHandler, 10000);
   }
 };
