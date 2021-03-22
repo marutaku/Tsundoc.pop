@@ -1,6 +1,7 @@
 import { Button, Container, Grid, TextField } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
 import { Book } from "../../../lib/models/book";
+import { TinySegmenter } from "./tiny_segmenter-0.2.js";
 
 interface BookFormProps {
   onSubmit: (book: Book) => void;
@@ -11,6 +12,10 @@ export const BookForm = ({ onSubmit }: BookFormProps) => {
   const [isbn, setIsbn] = useState<string>("");
   const [authorsString, setAuthors] = useState<string>("");
   const [image, setImage] = useState<string>("");
+
+  const [wakati, setWakati] = useState<string>("");
+  const segmenter = new TinySegmenter();
+
   const handleSubmit = () => {
     const authors = authorsString.split(",");
     onSubmit(new Book(title, isbn, authors, image));
@@ -84,6 +89,16 @@ export const BookForm = ({ onSubmit }: BookFormProps) => {
           <Button color="primary" onClick={handleSubmit}>
             保存
           </Button>
+        </Grid>
+        <Grid item xs={10}>
+          <TextField
+            onChange={(e) => setWakati(segmenter.segment(e.target.value).join(","))}
+            label="わかち書きにする"
+            style={{ width: "100%" }}
+          />
+        </Grid>
+        <Grid item xs={10}>
+        <p>{wakati}</p>
         </Grid>
       </Grid>
     </Container>
