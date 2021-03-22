@@ -6,7 +6,7 @@ import {
   Typography,
   Grid,
 } from "@material-ui/core";
-import { Add, List } from "@material-ui/icons";
+import { Add, List, Settings } from "@material-ui/icons";
 import { useHistory } from "react-router-dom";
 
 export const Header = ({ height = 64 }) => {
@@ -22,13 +22,30 @@ export const Header = ({ height = 64 }) => {
           </Grid>
           <Grid container item xs={6} justify="flex-end">
             <Grid item>
-              <IconButton color="inherit" onClick={() => history.push("/")}>
+              <IconButton
+                color="inherit"
+                onClick={() => history.push("/")}
+                size="small"
+              >
                 <Add />
               </IconButton>
             </Grid>
             <Grid item>
-              <IconButton color="inherit" onClick={() => history.push("/list")}>
+              <IconButton
+                color="inherit"
+                onClick={() => history.push("/list")}
+                size="small"
+              >
                 <List />
+              </IconButton>
+            </Grid>
+            <Grid item>
+              <IconButton
+                color="inherit"
+                onClick={() => chrome.runtime.openOptionsPage()}
+                size="small"
+              >
+                <Settings />
               </IconButton>
             </Grid>
           </Grid>
