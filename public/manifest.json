@@ -23,6 +23,7 @@
             ]
         }
     ],
+    "options_page": "options-index.html",
     "icons": {
         "16": "logo192.png",
         "48": "logo192.png",

@@ -12,7 +12,7 @@ module.exports = {
   entry: {
     "popup-index": "./src/popup-index.tsx",
     "page-action": "./src/page-action.ts",
-    "settings-page": "./src/settings-index.tsx",
+    "options-page": "./src/options-index.tsx",
   },
   devtool: "source-map",
   // ファイルの出力設定
