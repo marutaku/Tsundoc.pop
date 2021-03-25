@@ -9,10 +9,19 @@
 }
 
 #embed-banner {
-  padding: 10px;
+  position: relative;
+  padding: 16px;
   background-color: white;
   border: solid 1px rgb(45, 45, 45);
   border-radius: 5px;
+}
+
+#banner-close {
+  position: absolute;
+  padding-right: 6px;
+  top: 0;
+  right: 0;
+  font-size: 16px;
 }
 
 #banner-title {
@@ -23,4 +32,3 @@
 #banner-subtitle {
   font-size: 18px;
 }
-
