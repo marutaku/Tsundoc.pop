@@ -31,7 +31,6 @@ window.onload = async () => {
   const intervalHandler = () => {
     const random = Math.floor(Math.random() * books.length);
     injectContent(banner, books[random].title, books[random].authors.join(","));
-    console.log("Show banner");
   };
   if (books.length !== 0) {
     setInterval(intervalHandler, 10000);
