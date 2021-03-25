@@ -1,40 +1,11 @@
 import { Book } from "./lib/models/book";
 import { LocalStorage } from "./lib/storage/local-storage";
-
-async function createBanner(): Promise<Element> {
-  const banner = document.createElement("div");
-  banner.id = "banner-wrapper";
-  const htmlURL = chrome.extension.getURL("embed-banner.html");
-  return fetch(htmlURL)
-    .then((res) => res.text())
-    .then((htmlString) => {
-      banner.innerHTML = htmlString;
-      return banner;
-    });
-}
-
-function createStyleSheetLink(): HTMLLinkElement {
-  const linkElement = document.createElement("link");
-  linkElement.setAttribute("rel", "stylesheet");
-  linkElement.setAttribute("href", chrome.extension.getURL("embed-banner.css"));
-  return linkElement;
-}
-
-function injectContent(
-  element: Element,
-  title: string,
-  subtitle: string
-): Element {
-  const titleElement = element.querySelector("#banner-title");
-  const subtitleElement = element.querySelector("#banner-subtitle");
-  if (titleElement && subtitleElement) {
-    titleElement.innerHTML = title;
-    subtitleElement.innerHTML = subtitle;
-  } else {
-    throw new Error(`Unexpected Element.`);
-  }
-  return element;
-}
+import { applyStyles } from "./embed-banner/apply_style";
+import {
+  createStyleSheetLink,
+  injectContent,
+  createBanner,
+} from "./embed-banner/banner";
 
 window.onload = async () => {
   const storage = new LocalStorage();
@@ -43,7 +14,7 @@ window.onload = async () => {
     const key = Object.keys(record)[0];
     return Book.parse(record[key]);
   });
-  const banner = await createBanner();
+  const banner = await createBanner("embed-banner.html");
   const body = document.querySelector("body");
   const linkElement = createStyleSheetLink();
   if (!body) {
