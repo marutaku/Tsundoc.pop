@@ -1,4 +1,5 @@
-import { Button, Container, Grid, TextField } from "@material-ui/core";
+import { Button, Container, Grid, TextField, CircularProgress, Snackbar, IconButton } from "@material-ui/core";
+import CloseIcon from '@material-ui/icons/Close';
 import React, { useState, useEffect } from "react";
 import { Book } from "../../../lib/models/book";
 
@@ -11,22 +12,62 @@ export const BookForm = ({ onSubmit }: BookFormProps) => {
   const [isbn, setIsbn] = useState<string>("");
   const [authorsString, setAuthors] = useState<string>("");
   const [image, setImage] = useState<string>("");
+  const [isSearching, setIsSearching] = useState<boolean>(false);
+  const [isSaving, setIsSaving] = useState<boolean>(false);
+  const [open, setOpen] = useState(false);
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+  const handleClose = (event: React.SyntheticEvent | React.MouseEvent, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  };
   const handleSubmit = () => {
-    const authors = authorsString.split(",");
-    onSubmit(new Book(title, isbn, authors, image));
-    setTitle("");
-    setIsbn("");
-    setAuthors("");
-    setImage("");
+    setIsSaving(true);
+    const obj = {"title": title};
+    const body = JSON.stringify(obj);
+    const method = "POST";
+    const headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    // サイトのタイトルも同じ処理なのでsrc/libに書き出したかったけどtypescriptでのasyncがよくわからなくてここに書いてしまった
+    fetch('https://tsundoc-pop-idclo2e3ea-an.a.run.app/nouns', {method, headers, body})
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+          return response.json();
+        })
+      .then(data => {
+        const authors = authorsString.split("／著");
+        onSubmit(new Book(title, isbn, authors, image, data.nouns));
+        setTitle("");
+        setIsbn("");
+        setAuthors("");
+        setImage("");
+        setIsSaving(false);
+        setOpen(true);
+        })
+      .catch(error => {
+        console.error('There has been a problem with your fetch operation:', error);
+        setIsSaving(false);
+        });
   };
   // useEffectでうまくやりたかったけど時間なかった
   const fetchBookInfo = () => {
+    setIsSearching(true);
     const baseUrl: string = 'https://api.openbd.jp/v1/get?isbn=';
     fetch(baseUrl + isbn)
       .then(response => {
           if (!response.ok) {
           throw new Error('Network response was not ok');
           }
+          setIsSearching(false);
           return response.json();
           })
     .then(data => {
@@ -57,7 +98,7 @@ export const BookForm = ({ onSubmit }: BookFormProps) => {
         </Grid>
         <Grid item xs={10}>
           <Button color="primary" onClick={fetchBookInfo}>
-            検索
+            { isSearching ? <CircularProgress /> : '検索' }
           </Button>
         </Grid>
         <Grid item xs={10}>
@@ -82,10 +123,24 @@ export const BookForm = ({ onSubmit }: BookFormProps) => {
         </Grid>
         <Grid item xs={10}>
           <Button color="primary" onClick={handleSubmit}>
-            保存
+            { isSaving ? <CircularProgress /> : '保存' }
           </Button>
         </Grid>
       </Grid>
+      <Snackbar
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center', }}
+        open={open}
+        autoHideDuration={5000}
+        onClose={handleClose}
+        message="保存しました"
+        action={
+          <React.Fragment>
+            <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
+            <CloseIcon fontSize="small" />
+            </IconButton>
+            </React.Fragment>
+        }
+      />
     </Container>
   );
 };
