@@ -1,6 +1,6 @@
 import os
 from flask import Flask, request
-fram flask_cors import CORS
+from flask_cors import CORS
 import pkg_resources, imp
 imp.reload(pkg_resources)
 
