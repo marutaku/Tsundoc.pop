@@ -1,5 +1,6 @@
 import os
 from flask import Flask, request
+fram flask_cors import CORS
 import pkg_resources, imp
 imp.reload(pkg_resources)
 
@@ -7,6 +8,7 @@ import spacy
 nlp = spacy.load('ja_ginza')
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route("/nouns", methods=['POST'])
 def extract_nouns():
