@@ -2,9 +2,14 @@ import { Button, Container, Grid, TextField, CircularProgress, Snackbar, IconBut
 import CloseIcon from '@material-ui/icons/Close';
 import React, { useState, useEffect } from "react";
 import { Book } from "../../../lib/models/book";
+import { http, HttpResponse } from "../../../lib/models/http";
 
 interface BookFormProps {
   onSubmit: (book: Book) => void;
+}
+
+interface NounList {
+  nouns: string;
 }
 
 export const BookForm = ({ onSubmit }: BookFormProps) => {
@@ -25,38 +30,40 @@ export const BookForm = ({ onSubmit }: BookFormProps) => {
     }
     setOpen(false);
   };
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     setIsSaving(true);
-    const obj = {"title": title};
-    const body = JSON.stringify(obj);
-    const method = "POST";
-    const headers = {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    };
 
-    // サイトのタイトルも同じ処理なのでsrc/libに書き出したかったけどtypescriptでのasyncがよくわからなくてここに書いてしまった
-    fetch('https://tsundoc-pop-idclo2e3ea-an.a.run.app/nouns', {method, headers, body})
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
+    const obj = {"title": title};
+    const request: Request = new Request(
+        "https://tsundoc-pop-idclo2e3ea-an.a.run.app/nouns",
+        {
+          method: "POST",
+          body: JSON.stringify(obj),
+          headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
         }
-          return response.json();
-        })
-      .then(data => {
-        const authors = authorsString.split("／著");
-        onSubmit(new Book(title, isbn, authors, image, data.nouns));
-        setTitle("");
-        setIsbn("");
-        setAuthors("");
-        setImage("");
-        setIsSaving(false);
-        setOpen(true);
-        })
-      .catch(error => {
-        console.error('There has been a problem with your fetch operation:', error);
-        setIsSaving(false);
-        });
+      });
+    let response: HttpResponse<NounList>;
+    let nouns: any;
+    try {
+      response = await http<NounList>(request);
+      console.log("res", response.parsedBody);
+      nouns = response.parsedBody?.nouns;
+    } catch(response) {
+      console.log("error", response);
+      nouns = "";
+    }
+
+    const authors = authorsString.split("／著");
+    onSubmit(new Book(title, isbn, authors, image, nouns));
+    setTitle("");
+    setIsbn("");
+    setAuthors("");
+    setImage("");
+    setIsSaving(false);
+    setOpen(true);
+
   };
   // useEffectでうまくやりたかったけど時間なかった
   const fetchBookInfo = () => {
