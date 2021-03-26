@@ -25,6 +25,24 @@ def extract_nouns():
     else:
         return { "msg": "params are not exits" }
 
+@app.route("/nouns_list", methods=['POST'])
+def extract_nouns_batch():
+    request_json = request.get_json()
+    if request_json and 'titles' in request_json:
+
+        titles = request_json['titles']
+        nouns_list = []
+        for title in titles:
+            doc = nlp(title)
+            nouns = []
+            for sent in doc.sents:
+                nouns += [token.orth_ for token in sent if "NOUN" in token.pos_]
+            nouns_list.append(",".join(nouns))
+
+        return { "nounsList": nouns_list }
+
+    else:
+        return { "msg": "params are not exits" }
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
