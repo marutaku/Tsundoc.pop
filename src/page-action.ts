@@ -16,6 +16,6 @@ window.onload = async () => {
   if (!body) {
     throw new Error("Body not found ");
   }
-  // initBanner(books, body);
-  initModal(books, body);
+  // 
+  initModal(books, body, () => initBanner(books, body));
 };
