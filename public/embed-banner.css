@@ -26,6 +26,7 @@
   background-color: white;
   border: solid 1px rgb(45, 45, 45);
   border-radius: 2px;
+  text-align: center;
 }
 
 #banner-close {
@@ -39,8 +40,9 @@
 #banner-title {
   font-size: 24px;
   font-weight: 500;
-  font-family: "LightNovelPOPv2", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Helvetica Neue",
-    Arial, Meiryo, sans-serif;
+  font-family: "LightNovelPOPv2", "Hiragino Kaku Gothic ProN", "Hiragino Sans",
+    "Helvetica Neue", Arial, Meiryo, sans-serif;
+  margin-bottom: 20px;
 }
 
 #banner-subtitle {
