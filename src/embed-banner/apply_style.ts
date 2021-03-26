@@ -6,24 +6,19 @@ interface CustomStyle {
 
 const DEFAULT_STYLES: CustomStyle[] = [
   {
-    background: "#C4C4C4",
-    text: "#2DB497",
-    accent: "#FAF6B0",
+    background: "#F4A7B9",
+    text: "#FFFFFF",
+    accent: "#EEEEEE",
   },
   {
-    background: "#FFC4C8",
-    text: "#FF5685",
-    accent: "#FEB25D",
+    background: "#F4A7B9",
+    text: "#FFFFFF",
+    accent: "#EEEEEE",
   },
   {
-    background: "#50B3A9",
-    text: "#FFA6F8",
-    accent: "#FFE373",
-  },
-  {
-    background: "#41747E",
-    text: "#D5E7F2",
-    accent: "#CF4758",
+    background: "#fddec0",
+    text: "#052342",
+    accent: "#052342",
   },
 ];
 

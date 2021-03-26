@@ -1,3 +1,15 @@
+@font-face {
+  font-family: "LightNovelPOPv2";
+  src: local("LightNovelPOPv2.otf"),
+    url("chrome-extension://__MSG_@@extension_id__/LightNovelPOPv2.otf")
+      format("opentype");
+}
+
+.title {
+  font-family: "LightNovelPOPv2", serif;
+  font-size: 18px;
+}
+
 #banner-wrapper {
   margin: 12px auto;
   position: fixed;
@@ -13,7 +25,8 @@
   padding: 16px;
   background-color: white;
   border: solid 1px rgb(45, 45, 45);
-  border-radius: 5px;
+  border-radius: 2px;
+  text-align: center;
 }
 
 #banner-close {
@@ -27,6 +40,9 @@
 #banner-title {
   font-size: 24px;
   font-weight: 500;
+  font-family: "LightNovelPOPv2", "Hiragino Kaku Gothic ProN", "Hiragino Sans",
+    "Helvetica Neue", Arial, Meiryo, sans-serif;
+  margin-bottom: 20px;
 }
 
 #banner-subtitle {
