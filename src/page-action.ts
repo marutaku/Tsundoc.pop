@@ -1,13 +1,15 @@
 import { Book } from "./lib/models/book";
 import { LocalStorage } from "./lib/storage/local-storage";
-import { http, HttpResponse } from "./lib/models/http";
 
 import { initBanner } from "./embed-banner/banner";
 import { initModal } from "./embed-banner/modal";
+import { sortBooks } from "./embed-banner/utils";
 
-interface NounList {
-  nouns: string;
+export interface SuggestBook extends Book {
+  commonNounSet?: Set<string>;
+  similarity?: Number
 }
+
 
 window.onload = async () => {
   // Init MicroModal
@@ -27,35 +29,9 @@ window.onload = async () => {
   if (!pageTitle) {
     throw new Error("page title not found ");
   }
+  const sortedBooks: Array<SuggestBook> = await sortBooks(pageTitle, books);
 
-  console.log(pageTitle)
-  const obj = {"title": pageTitle};
-  const request: Request = new Request(
-    "https://tsundoc-pop-idclo2e3ea-an.a.run.app/nouns",
-    {
-      method: "POST",
-      body: JSON.stringify(obj),
-      mode: 'cors',
-      headers: {
-        'Accept': 'application/json',
-        'Access-Control-Allow-Origin':'*' ,
-        'Access-Control-Allow-Methods': 'POST,GET,PUT,DELETE',
-        'Content-Type': 'application/json'
-      }
-    }
-  );
-  console.log(typeof(pageTitle));
-  let response: HttpResponse<NounList>;
-  let nouns: any;
-  try {
-    response = await http<NounList>(request);
-    console.log("res", response.parsedBody);
-    nouns = response.parsedBody?.nouns;
-  } catch(response) {
-    console.log("error", response);
-    nouns = "";
-  }
 
   // initBanner(books, body);
-  initModal(books, body);
+  initModal(sortedBooks, body);
 };
