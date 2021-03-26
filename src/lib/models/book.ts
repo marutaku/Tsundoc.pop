@@ -5,6 +5,7 @@ export interface BookImpl {
   title: string;
   author?: string[];
   image?: string;
+  nouns?: string;
   createdAt: Date;
   toString: () => string;
   // static parse: (jsonString: string) => BookImpl;
@@ -16,6 +17,7 @@ export class Book implements BookImpl {
     public isbn: string,
     public authors: string[] = [],
     public image?: string,
+    public nouns?: string,
     public createdAt: Date = new Date()
   ) {}
   public toString(): string {
@@ -24,6 +26,7 @@ export class Book implements BookImpl {
       isbn: this.isbn,
       authors: this.authors,
       image: this.image,
+      nouns: this.nouns,
       createdAt: moment(this.createdAt).toISOString(),
     });
   }
@@ -34,6 +37,7 @@ export class Book implements BookImpl {
       data.isbn,
       data.authors,
       data.image,
+      data.nouns,
       moment(data.createdAt).toDate()
     );
   }
