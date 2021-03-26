@@ -14,7 +14,7 @@ This Chrome extension uses NLP to display ads such as pop-ups and banners for re
 
 # Demo
 
-## Dependencies
+# Dependencies
 
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
@@ -45,6 +45,10 @@ $ yarn build
 access [Chrome Extension Settings](chrome://extensions/) and Enable developer mode.
 
 click on load unpackaged and select the folder.
+
+# more easily
+
+Download [here](https://drive.google.com/drive/folders/1oxXl_eNfzReF3YiHscDzBjrLX-fMuyG4?usp=sharing)
 
 # Auther
 
