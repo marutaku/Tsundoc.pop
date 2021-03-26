@@ -3,8 +3,7 @@ dialog#tundoku-modal {
   border: none;
   font-size: 18px;
   width: 600px;
-  max-height: 500px;
-  box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.2)
+  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.2);
 }
 dialog#tundoku-modal::backdrop {
   /* 背景を半透明のブラックにする */
@@ -32,8 +31,11 @@ dialog#tundoku-modal::backdrop {
 .modal-header {
   /* TODO: フォントサイズの調整 */
   text-align: center;
-  font-size: 20px !important;
+  font-size: 30px !important;
   margin: 12px 6px;
+}
+.do-not-wrap {
+  display: inline-block;
 }
 .modal-content {
   display: flex;
@@ -53,8 +55,8 @@ dialog#tundoku-modal::backdrop {
   color: #fff;
   background: #f56500;
 }
-a.btn,
-button.btn {
+a.tundoku-custom-btn,
+button.tundoku-custom-btn {
   font-weight: 700;
   line-height: 1.5;
   position: relative;
