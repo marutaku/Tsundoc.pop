@@ -16,16 +16,8 @@ This Chrome extension uses NLP to display ads such as pop-ups and banners for re
 
 # Dependencies
 
-    "@material-ui/core": "^4.11.3",
-    "@material-ui/icons": "^4.11.2",
-    "moment": "^2.29.1",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "^4.0.3",
-    "webpack": "^4.44.2"
-
-
+    "node":"14.16~"
+    
 # Usage
 
 1. Register a list of Tsundoku using API or barcode reader.
@@ -57,6 +49,7 @@ Download [here](https://drive.google.com/drive/folders/1oxXl_eNfzReF3YiHscDzBjrL
 * [or-rin](https://github.com/or-rin)
 
 ## Directory Structure
+
 <pre>
 Tsundoc.pop
 ├─cloudrun
