@@ -1,51 +1,72 @@
-# Getting Started with Create React App
+[![tundoclogo](https://user-images.githubusercontent.com/43875278/112616299-e41f5880-8e66-11eb-9f87-2997ee381bef.png)](https://github.com/marutaku/Tsundoc.pop)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## ディレクトリ構成
-* src(あとでpopupに改名予定): ポップアップの見た目に関するコード
-* browser-action: DoItおじさんのようなブラウザアクションの機能に関するコード
-* lib: ポップアップとブラウザアクションで共通で使用する処理(Storage読み書きなど)
+ツンドク.pop()はエンジニアの積読消化を助けます。
 
-## Available Scripts
+自然言語処理を用いて、閲覧中のウェブサイトに存在するワードに似た,積読本のポップアップやバナーなどの広告を表示するChrome拡張です。
 
-In the project directory, you can run:
 
-### `yarn start`
+Tsundoku.pop() is a Chrome extension to help engineers read books.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+This Chrome extension uses NLP to display ads such as pop-ups and banners for reading books that resemble the words that exist on the website you are browsing.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `yarn test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Demo
 
-### `yarn build`
+## Dependencies
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    "@material-ui/core": "^4.11.3",
+    "@material-ui/icons": "^4.11.2",
+    "moment": "^2.29.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^4.0.3",
+    "webpack": "^4.44.2"
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Usage
 
-### `yarn eject`
+1. Register a list of Tsundoku using API or barcode reader.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+2. Browse freely, ads will lead you to reading.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# Installation
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```
+ $ git clone  https://github.com/marutaku/Tsundoc.pop
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```
+$ yarn build
+```
 
-## Learn More
+access [Chrome Extension Settings](chrome://extensions/) and Enable developer mode.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+click on load unpackaged and select the folder.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# Auther
+
+* [sh05](https://github.com/sh05)
+* [marutaku](https://github.com/marutaku)
+* [or-rin](https://github.com/or-rin)
+
+## Directory Structure
+<pre>
+Tsundoc.pop
+├─cloudrun
+├─public
+└─src
+    ├─embed-banner
+    ├─lib
+    │  ├─fonts
+    │  ├─models
+    │  └─storage
+    ├─options
+    └─popup
+        └─components
+            ├─book-form
+            ├─book-list
+            └─header
+</pre>
