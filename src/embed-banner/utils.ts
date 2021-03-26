@@ -1,13 +1,8 @@
-import { Book } from "../lib/models/book";
+import { Book, SuggestBook } from "../lib/models/book";
 import { http, HttpResponse } from "../lib/models/http";
 
 interface NounList {
   nouns: string;
-}
-
-export interface SuggestBook extends Book {
-  commonNounSet?: Set<string>;
-  similarity?: Number
 }
 
 export async function loadHTML(
@@ -73,6 +68,7 @@ function union(a: Set<string>, b: Set<string>): Set<string> {
     return _union;
 }
 
+
 export async function sortBooks(pageTitle: string, books: Array<SuggestBook>): Promise<Array<SuggestBook>> {
   const pageNounSet: Set<string> = await getPageNounSet(pageTitle);
 
@@ -83,6 +79,12 @@ export async function sortBooks(pageTitle: string, books: Array<SuggestBook>): P
     book.similarity = book.commonNounSet.size / unionSet.size;
     return book;
   });
+
+  scoredBooks.sort(
+    function (a: SuggestBook, b: SuggestBook) {
+      return Number(a.similarity) - Number(b.similarity);
+    }
+  );
 
   return scoredBooks;
 }

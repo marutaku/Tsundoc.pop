@@ -33,5 +33,5 @@ window.onload = async () => {
 
 
   // initBanner(books, body);
-  initModal(books, body, () => initBanner(books, body));
+  initModal(sortedBooks, body, () => initBanner(sortedBooks, body));
 };
