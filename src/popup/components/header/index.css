@@ -1,0 +1,10 @@
+@font-face {
+  font-family: "LightNovelPOPv2";
+  src: local("LightNovelPOPv2.otf"),
+    url(../../../lib/fonts/LightNovelPOPv2.otf) format("opentype");
+}
+
+.title {
+  font-family: "LightNovelPOPv2", serif;
+  font-size: 18px;
+}
