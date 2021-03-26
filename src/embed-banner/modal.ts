@@ -18,7 +18,7 @@ function injectContent(
   } else {
     throw new Error(`Unexpected Element.`);
   }
-  return applyStyles(element);
+  return element;
 }
 
 export async function initModal(books: Book[], bodyElement: Element) {
