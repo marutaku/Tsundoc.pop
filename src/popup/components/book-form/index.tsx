@@ -55,7 +55,13 @@ export const BookForm = ({ onSubmit }: BookFormProps) => {
       nouns = "";
     }
 
-    const authors = authorsString.split("／著");
+    let authors = authorsString.split("／著");
+    // splitの時に末尾に""が生まれるので
+    authors.pop();
+    if (!authors){
+      authors = new Array("");
+    }
+
     onSubmit(new Book(title, isbn, authors, image, nouns));
     setTitle("");
     setIsbn("");
