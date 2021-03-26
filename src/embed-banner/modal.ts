@@ -21,7 +21,11 @@ function injectContent(
   return element;
 }
 
-export async function initModal(books: Book[], bodyElement: Element) {
+export async function initModal(
+  books: Book[],
+  bodyElement: Element,
+  onModalClose: () => void
+) {
   const linkElement = createStyleSheetLink("embed-modal.css");
   const modal = document.createElement("div");
   modal.innerHTML = await loadHTML("embed-modal.html");
@@ -48,6 +52,7 @@ export async function initModal(books: Book[], bodyElement: Element) {
   closeButton.onclick = (e) => {
     e.preventDefault();
     dialog.close();
+    onModalClose();
   };
   dialog.showModal();
 }
