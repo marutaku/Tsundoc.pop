@@ -3,6 +3,13 @@ import { LocalStorage } from "./lib/storage/local-storage";
 
 import { initBanner } from "./embed-banner/banner";
 import { initModal } from "./embed-banner/modal";
+import { sortBooks } from "./embed-banner/utils";
+
+export interface SuggestBook extends Book {
+  commonNounSet?: Set<string>;
+  similarity?: Number
+}
+
 
 window.onload = async () => {
   // Init MicroModal
@@ -16,6 +23,15 @@ window.onload = async () => {
   if (!body) {
     throw new Error("Body not found ");
   }
-  // 
-  initModal(books, body, () => initBanner(books, body));
+
+  // sort books by similarity with page title
+  const pageTitle = document.querySelector("title")?.innerText;
+  if (!pageTitle) {
+    throw new Error("page title not found ");
+  }
+  const sortedBooks: Array<SuggestBook> = await sortBooks(pageTitle, books);
+
+
+  // initBanner(books, body);
+  initModal(sortedBooks, body, () => initBanner(sortedBooks, body));
 };

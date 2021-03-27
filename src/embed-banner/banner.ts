@@ -1,4 +1,4 @@
-import { Book } from "./../lib/models/book";
+import { Book, SuggestBook } from "../lib/models/book";
 import { applyStyles } from "./apply_style";
 import { loadHTML, createStyleSheetLink, randomChoice } from "./utils";
 
@@ -25,7 +25,7 @@ function injectContent(
   return applyStyles(element);
 }
 
-export async function initBanner(books: Book[], bodyElement: Element) {
+export async function initBanner(books: SuggestBook[], bodyElement: Element) {
   const linkElement = createStyleSheetLink("embed-banner.css");
   const banner = await createBanner("embed-banner.html");
   bodyElement.insertBefore(linkElement, bodyElement.firstChild);
@@ -33,7 +33,11 @@ export async function initBanner(books: Book[], bodyElement: Element) {
   const firstBook = randomChoice(books);
   injectContent(banner, firstBook.title, firstBook.authors.join(","));
   const intervalHandler = () => {
-    const selectedBook = randomChoice(books);
+    // const selectedBook = randomChoice(books);
+    const selectedBook = books.pop();
+    if (!selectedBook) {
+      throw new Error("no books");
+    }
     injectContent(banner, selectedBook.title, selectedBook.authors.join(","));
   };
   if (books.length !== 0) {

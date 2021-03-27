@@ -42,3 +42,9 @@ export class Book implements BookImpl {
     );
   }
 }
+
+export interface SuggestBook extends Book {
+  commonNounSet?: Set<string>;
+  similarity?: Number
+}
+
