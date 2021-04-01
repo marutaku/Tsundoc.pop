@@ -38,10 +38,6 @@ access [Chrome Extension Settings](chrome://extensions/) and Enable developer mo
 
 click on load unpackaged and select the folder.
 
-# more easily
-
-Download [here](https://drive.google.com/drive/folders/1JvLDVU9RU2W0wu1PFE65phvR9KtoJop5?usp=sharing)
-
 # Auther
 
 * [sh05](https://github.com/sh05)
